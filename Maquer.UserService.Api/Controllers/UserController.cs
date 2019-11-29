@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Maquer.Common.Api;
-using Maquer.UserService.Domain.Dtos;
-using Maquer.UserService.Domain.Entities;
-using Maquer.UserService.Domain.Repositories;
+using Maquer.Domain.User.Entities;
+using Maquer.Domain.User.Repositories;
+using Maquer.UserService.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

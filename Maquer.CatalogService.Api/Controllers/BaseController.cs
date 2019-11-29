@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Maquer.Domain.User.Repositories;
+using Maquer.Domain.Catalog.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Maquer.UserService.Api.Controllers
+namespace Maquer.CatalogService.Api.Controllers
 {
     public class BaseController : ControllerBase
     {

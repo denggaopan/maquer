@@ -96,3 +96,9 @@
 /Maquer.UserService.Api/obj
 /Maquer.UserService.Domain/obj
 /Maquer.UserService.Domain/bin
+/Maquer.Domain.Catalog/bin
+/Maquer.Domain.Catalog/obj
+/Maquer.Domain.User/obj
+/Maquer.Domain.User/bin
+/Maquer.UserService.Dtos/bin
+/Maquer.UserService.Dtos/obj

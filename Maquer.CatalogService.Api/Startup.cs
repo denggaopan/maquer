@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Maquer.Common;
-using Maquer.Domain.User.Entities;
-using Maquer.Domain.User.Repositories;
-using Maquer.UserService.Dtos;
+using Maquer.Domain.Catalog.Entities;
+using Maquer.Domain.Catalog.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Maquer.UserService.Api
+namespace Maquer.CatalogService.Api
 {
     public class Startup
     {
@@ -30,34 +28,27 @@ namespace Maquer.UserService.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            #region AutoMapper
-            Mapper.Initialize(config =>
-            {
-                config.CreateMap<User, UserDto>();
-            });
-            #endregion
 
             services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddScoped<DbContext, ApplicationDbContext>();
-            services.AddScoped<IUnitOfWork,UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddConsulConfig(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(o=>o.SerializerSettings.DateFormatString="yyyy-MM-dd HH:mm:ss");
+                .AddJsonOptions(o => o.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss");
 
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
                     options.Authority = "http://localhost:5001";
                     options.RequireHttpsMetadata = false;
-                    options.Audience = "UserService";
+                    options.Audience = "CatalogService";
                 });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env,ApplicationDbContext db)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext db)
         {
             if (db.Database.GetPendingMigrations().Any())
             {
