@@ -39,17 +39,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maquer.UserService.Api", "M
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{6312B459-FC7F-458D-8209-D55AACE4CCD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maquer.AuthService.Dtos", "Maquer.AuthService.Dtos\Maquer.AuthService.Dtos.csproj", "{63C9EAD1-02FE-472D-B2F9-FC58A4B5C76F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maquer.AuthService.Dtos", "Maquer.AuthService.Dtos\Maquer.AuthService.Dtos.csproj", "{63C9EAD1-02FE-472D-B2F9-FC58A4B5C76F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maquer.CatalogService.Api", "Maquer.CatalogService.Api\Maquer.CatalogService.Api.csproj", "{386155A5-2066-4AE3-AA2C-EA63B2BF7655}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maquer.CatalogService.Api", "Maquer.CatalogService.Api\Maquer.CatalogService.Api.csproj", "{386155A5-2066-4AE3-AA2C-EA63B2BF7655}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maquer.Domain.Catalog", "Maquer.Domain.Catalog\Maquer.Domain.Catalog.csproj", "{06C454C3-0BC7-4BE8-A77C-23145EBAB2F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maquer.Domain.Catalog", "Maquer.Domain.Catalog\Maquer.Domain.Catalog.csproj", "{06C454C3-0BC7-4BE8-A77C-23145EBAB2F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maquer.UserService.Dtos", "Maquer.UserService.Dtos\Maquer.UserService.Dtos.csproj", "{BBF0012C-D399-4B36-A98D-AD2CB206F2D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maquer.UserService.Dtos", "Maquer.UserService.Dtos\Maquer.UserService.Dtos.csproj", "{BBF0012C-D399-4B36-A98D-AD2CB206F2D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maquer.Domain.User", "Maquer.Domain.User\Maquer.Domain.User.csproj", "{8653283A-531F-4D97-A5CD-607FC1A33B86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maquer.CatalogService.Dtos", "Maquer.CatalogService.Dtos\Maquer.CatalogService.Dtos.csproj", "{585EA309-C203-4A59-A895-64E6DEE58BE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maquer.CatalogService.Dtos", "Maquer.CatalogService.Dtos\Maquer.CatalogService.Dtos.csproj", "{585EA309-C203-4A59-A895-64E6DEE58BE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maquer.Domain.User", "Maquer.Domain.User\Maquer.Domain.User.csproj", "{CC2462A2-6041-4900-9805-3C120130CD05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,14 +93,14 @@ Global
 		{BBF0012C-D399-4B36-A98D-AD2CB206F2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBF0012C-D399-4B36-A98D-AD2CB206F2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBF0012C-D399-4B36-A98D-AD2CB206F2D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8653283A-531F-4D97-A5CD-607FC1A33B86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8653283A-531F-4D97-A5CD-607FC1A33B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8653283A-531F-4D97-A5CD-607FC1A33B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8653283A-531F-4D97-A5CD-607FC1A33B86}.Release|Any CPU.Build.0 = Release|Any CPU
 		{585EA309-C203-4A59-A895-64E6DEE58BE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{585EA309-C203-4A59-A895-64E6DEE58BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{585EA309-C203-4A59-A895-64E6DEE58BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{585EA309-C203-4A59-A895-64E6DEE58BE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC2462A2-6041-4900-9805-3C120130CD05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC2462A2-6041-4900-9805-3C120130CD05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC2462A2-6041-4900-9805-3C120130CD05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC2462A2-6041-4900-9805-3C120130CD05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,8 +124,8 @@ Global
 		{386155A5-2066-4AE3-AA2C-EA63B2BF7655} = {777E6D42-2CD7-4BE6-865E-7D5314FBF6B4}
 		{06C454C3-0BC7-4BE8-A77C-23145EBAB2F8} = {6312B459-FC7F-458D-8209-D55AACE4CCD8}
 		{BBF0012C-D399-4B36-A98D-AD2CB206F2D7} = {27F1B62F-A620-4CA3-B9F4-9DF4D3AF6698}
-		{8653283A-531F-4D97-A5CD-607FC1A33B86} = {6312B459-FC7F-458D-8209-D55AACE4CCD8}
 		{585EA309-C203-4A59-A895-64E6DEE58BE5} = {777E6D42-2CD7-4BE6-865E-7D5314FBF6B4}
+		{CC2462A2-6041-4900-9805-3C120130CD05} = {6312B459-FC7F-458D-8209-D55AACE4CCD8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9A05C08F-57B1-4FB2-B81C-48D699CC2711}
