@@ -70,6 +70,28 @@ namespace Maquer.AuthService.Api.Controllers
             return new ApiResult<string> { Code = (int)ApiStatusCode.Success,Message="SUCCESS", Data = tokenResponse.AccessToken };
         }
 
+        [HttpPost("valid")]
+        public ApiResult<bool> Valid([FromBody] TokenValidDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return new ApiResult<bool> { Code = (int)ApiStatusCode.Error, Message = "数据校验不通过", Data = false };
+            }
+            var login = _uow.Repository<UserLogin>().Get(a=>a.Token == dto.Token);
+            if(login == null)
+            {
+                return new ApiResult<bool> { Code = (int)ApiStatusCode.Fail, Message = "用户未曾登录",Data=false };
+            }
+
+            var success = login.CreatedTime.AddMinutes(login.Expires) >= DateTime.Now;
+            if (!success)
+            {
+                return new ApiResult<bool> { Code = (int)ApiStatusCode.Fail, Message = "登录已过期", Data = false };
+            }
+
+            return new ApiResult<bool> { Code = (int)ApiStatusCode.Success, Message = "SUCCESS", Data = true };
+        }
+
 
     }
 }
