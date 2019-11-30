@@ -16,11 +16,11 @@ namespace Maquer.AuthService.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TokenController : BaseController
+    public class Token2Controller : BaseController
     {
         private readonly IRepository<User> _userRepo;
         private readonly IConfiguration _configuration;
-        public TokenController(IUnitOfWork uow,IConfiguration configuration):base(uow)
+        public Token2Controller(IUnitOfWork uow,IConfiguration configuration):base(uow)
         {
             _configuration = configuration;
             _userRepo = _uow.Repository<User>();
@@ -46,11 +46,13 @@ namespace Maquer.AuthService.Api.Controllers
             {
                 return new ApiResult<string> { Code = (int)ApiStatusCode.Fail,Message= "认证服务器未启动" };
             }
-            TokenResponse tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
+            TokenResponse tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
             {
                 Address = dr.TokenEndpoint,
-                ClientId = _configuration["IdentityServer:AuthServiceClient:ClientId"],
-                ClientSecret = _configuration["IdentityServer:AuthServiceClient:ClientSecret"]
+                ClientId = _configuration["IdentityServer:AuthServiceClient2:ClientId"],
+                ClientSecret = _configuration["IdentityServer:AuthServiceClient2:ClientSecret"],
+                UserName = _configuration["IdentityServer:AuthServiceClient2:UserName"],
+                Password = _configuration["IdentityServer:AuthServiceClient2:Password"]
             });
 
             if (tokenResponse.IsError)

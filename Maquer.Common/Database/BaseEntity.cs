@@ -7,7 +7,7 @@ namespace Maquer.Common.Database
     public class BaseEntity<T>
     {
         public T Id { get; set; }
-        public DateTime CreatedTime { get; set; }
+        public DateTime CreatedTime { get; set; } = DateTime.Now;
         public DateTime? UpdatedTime { get; set; }
         public bool IsDeleted{get;set;}
     }

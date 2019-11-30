@@ -51,6 +51,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maquer.Domain.User", "Maque
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maquer.Repositories", "Maquer.Repositories\Maquer.Repositories.csproj", "{8A759D2E-543D-479D-99A0-72869EFDFE4A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityServer", "{15D2CFD0-8FB1-4284-8668-D5BA7DD50D67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maquer.IdentityServer", "Maquer.IdentityServer\Maquer.IdentityServer.csproj", "{4D26751F-6815-4C78-8E2C-7F5296EB6078}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +105,10 @@ Global
 		{8A759D2E-543D-479D-99A0-72869EFDFE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A759D2E-543D-479D-99A0-72869EFDFE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A759D2E-543D-479D-99A0-72869EFDFE4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D26751F-6815-4C78-8E2C-7F5296EB6078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D26751F-6815-4C78-8E2C-7F5296EB6078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D26751F-6815-4C78-8E2C-7F5296EB6078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D26751F-6815-4C78-8E2C-7F5296EB6078}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +134,7 @@ Global
 		{585EA309-C203-4A59-A895-64E6DEE58BE5} = {777E6D42-2CD7-4BE6-865E-7D5314FBF6B4}
 		{CC2462A2-6041-4900-9805-3C120130CD05} = {6312B459-FC7F-458D-8209-D55AACE4CCD8}
 		{8A759D2E-543D-479D-99A0-72869EFDFE4A} = {F180B1DC-2545-44F7-8407-55E590BCFE1C}
+		{4D26751F-6815-4C78-8E2C-7F5296EB6078} = {15D2CFD0-8FB1-4284-8668-D5BA7DD50D67}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9A05C08F-57B1-4FB2-B81C-48D699CC2711}

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Maquer.AuthService.Api
+namespace Maquer.IdentityServer
 {
     public sealed class Config
     {
@@ -16,7 +16,8 @@ namespace Maquer.AuthService.Api
                  new ApiResource("AuthService", "AuthService API"),
                  new ApiResource("UserService", "UserService API"),
                  new ApiResource("CatalogService", "CatalogService API"),
-                 new ApiResource("OrderService", "OrderService API")
+                 new ApiResource("OrderService", "OrderService API"),
+                 new ApiResource("PaymentService", "PaymentService API")
              };
         }
 
@@ -26,13 +27,24 @@ namespace Maquer.AuthService.Api
              {
                  new Client
                  {
+                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                      ClientId = "AuthServiceClient",
-                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                      ClientSecrets =
                      {
                          new Secret("AuthServiceClient".Sha256())
                      },
-                     AllowedScopes = new List<string> { "AuthService","UserService","CatalogService","OrderService"},
+                     AllowedScopes = new List<string> { "AuthService","UserService","CatalogService","OrderService","PaymentService"},
+                     AccessTokenLifetime = 60 * 60 * 1
+                 },
+                 new Client
+                 {
+                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                     ClientId = "AuthServiceClient2",
+                     ClientSecrets =
+                     {
+                         new Secret("AuthServiceClient2".Sha256())
+                     },
+                     AllowedScopes = new List<string> { "AuthService","UserService"},
                      AccessTokenLifetime = 60 * 60 * 1
                  }
              };
@@ -44,13 +56,13 @@ namespace Maquer.AuthService.Api
              {
                  new TestUser
                  {
-                     Username = "paul",
+                     Username = "test",
                      Password = "123456",
                      SubjectId = "1"
                  },
                  new TestUser
                  {
-                     Username = "pauldeng",
+                     Username = "test2",
                      Password = "123456",
                      SubjectId = "2"
                  }

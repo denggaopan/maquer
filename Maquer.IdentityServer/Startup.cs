@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Maquer.Common;
-using Maquer.Domain.User.Entities;
-using Maquer.Repositories;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Maquer.AuthService.Api
+namespace Maquer.IdentityServer
 {
     public class Startup
     {
@@ -29,15 +26,12 @@ namespace Maquer.AuthService.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Default")));
-            services.AddScoped<DbContext, ApplicationDbContext>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddConsulConfig(Configuration);
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(o => o.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss");
-
+            services.AddIdentityServer()
+                     .AddDeveloperSigningCredential()
+                     .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                     .AddInMemoryApiResources(Config.GetApiResources())
+                     .AddInMemoryClients(Config.GetClients())
+                     .AddTestUsers(Config.GetUsers());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,9 +41,7 @@ namespace Maquer.AuthService.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseConsul(Configuration);
-
+            app.UseIdentityServer();
             app.UseMvc();
         }
     }

@@ -20,6 +20,8 @@ namespace Maquer.Domain.User.Entities
         public string Avatar { get; set; }
         public DateTime? Birthday { get; set; }
         public string Address { get; set; }
+
+        public virtual ICollection<UserLogin> UserLogins { get; set; }
         
     }
 

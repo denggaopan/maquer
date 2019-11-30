@@ -105,3 +105,5 @@
 /Maquer.Domain.User
 /Maquer.Repositories/obj
 /Maquer.Repositories/bin
+/Maquer.IdentityServer/obj
+/Maquer.IdentityServer/bin

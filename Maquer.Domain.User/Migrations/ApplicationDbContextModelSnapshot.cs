@@ -65,6 +65,39 @@ namespace Maquer.Domain.User.Migrations
 
                     b.ToTable("User");
                 });
+
+            modelBuilder.Entity("Maquer.Domain.User.Entities.UserLogin", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(128);
+
+                    b.Property<DateTime>("CreatedTime");
+
+                    b.Property<int>("Expires");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("Token")
+                        .HasMaxLength(1024);
+
+                    b.Property<DateTime?>("UpdatedTime");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserLogin");
+                });
+
+            modelBuilder.Entity("Maquer.Domain.User.Entities.UserLogin", b =>
+                {
+                    b.HasOne("Maquer.Domain.User.Entities.User", "User")
+                        .WithMany("UserLogins")
+                        .HasForeignKey("UserId");
+                });
 #pragma warning restore 612, 618
         }
     }
