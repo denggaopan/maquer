@@ -13,8 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Maquer.AuthService.Domain\Maquer.AuthService.Domain.csproj" />
     <ProjectReference Include="..\Maquer.AuthService.Dtos\Maquer.AuthService.Dtos.csproj" />
+    <ProjectReference Include="..\Maquer.Domain.User\Maquer.Domain.User.csproj" />
+    <ProjectReference Include="..\Maquer.Repositories\Maquer.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

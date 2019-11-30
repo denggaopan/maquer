@@ -26,6 +26,7 @@
         "dependencies": {
           "Maquer.CatalogService.Dtos": "1.0.0",
           "Maquer.Domain.Catalog": "1.0.0",
+          "Maquer.Repositories": "1.0.0",
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.EntityFrameworkCore": "2.2.6",
@@ -644,6 +645,17 @@
         },
         "compile": {
           "Maquer.Domain.Catalog.dll": {}
+        }
+      },
+      "Maquer.Repositories/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "2.2.6"
+        },
+        "runtime": {
+          "Maquer.Repositories.dll": {}
+        },
+        "compile": {
+          "Maquer.Repositories.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3988,6 +4000,11 @@
       "sha512": ""
     },
     "Maquer.Domain.Catalog/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Maquer.Repositories/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

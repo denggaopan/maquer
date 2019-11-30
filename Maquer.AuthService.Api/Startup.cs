@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Maquer.AuthService.Domain.Entities;
-using Maquer.AuthService.Domain.Repositories;
 using Maquer.Common;
+using Maquer.Domain.User.Entities;
+using Maquer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

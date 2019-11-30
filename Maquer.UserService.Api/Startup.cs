@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Maquer.Common;
 using Maquer.Domain.User.Entities;
-using Maquer.Domain.User.Repositories;
+using Maquer.Repositories;
 using Maquer.UserService.Dtos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

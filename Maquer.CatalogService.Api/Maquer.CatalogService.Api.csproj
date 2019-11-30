@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Maquer.CatalogService.Dtos\Maquer.CatalogService.Dtos.csproj" />
     <ProjectReference Include="..\Maquer.Domain.Catalog\Maquer.Domain.Catalog.csproj" />
+    <ProjectReference Include="..\Maquer.Repositories\Maquer.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

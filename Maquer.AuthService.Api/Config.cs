@@ -44,9 +44,15 @@ namespace Maquer.AuthService.Api
              {
                  new TestUser
                  {
-                     Username = "test",
+                     Username = "paul",
                      Password = "123456",
                      SubjectId = "1"
+                 },
+                 new TestUser
+                 {
+                     Username = "pauldeng",
+                     Password = "123456",
+                     SubjectId = "2"
                  }
              };
         }

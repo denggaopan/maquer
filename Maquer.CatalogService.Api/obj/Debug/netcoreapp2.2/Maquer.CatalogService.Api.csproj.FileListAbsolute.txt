@@ -21,3 +21,5 @@ E:\lab\maquer\Maquer.CatalogService.Api\obj\Debug\netcoreapp2.2\Maquer.CatalogSe
 E:\lab\maquer\Maquer.CatalogService.Api\obj\Debug\netcoreapp2.2\Maquer.CatalogService.Api.pdb
 E:\lab\maquer\Maquer.CatalogService.Api\bin\Debug\netcoreapp2.2\Maquer.CatalogService.Dtos.dll
 E:\lab\maquer\Maquer.CatalogService.Api\bin\Debug\netcoreapp2.2\Maquer.CatalogService.Dtos.pdb
+E:\lab\maquer\Maquer.CatalogService.Api\bin\Debug\netcoreapp2.2\Maquer.Repositories.dll
+E:\lab\maquer\Maquer.CatalogService.Api\bin\Debug\netcoreapp2.2\Maquer.Repositories.pdb

@@ -4829,6 +4829,19 @@
         "runtime": {
           "bin/placeholder/Maquer.Domain.Catalog.dll": {}
         }
+      },
+      "Maquer.Repositories/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "2.2.6"
+        },
+        "compile": {
+          "bin/placeholder/Maquer.Repositories.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Maquer.Repositories.dll": {}
+        }
       }
     }
   },
@@ -13152,12 +13165,18 @@
       "type": "project",
       "path": "../Maquer.Domain.Catalog/Maquer.Domain.Catalog.csproj",
       "msbuildProject": "../Maquer.Domain.Catalog/Maquer.Domain.Catalog.csproj"
+    },
+    "Maquer.Repositories/1.0.0": {
+      "type": "project",
+      "path": "../Maquer.Repositories/Maquer.Repositories.csproj",
+      "msbuildProject": "../Maquer.Repositories/Maquer.Repositories.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Maquer.CatalogService.Dtos >= 1.0.0",
       "Maquer.Domain.Catalog >= 1.0.0",
+      "Maquer.Repositories >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.EntityFrameworkCore >= 2.2.6",
@@ -13206,6 +13225,9 @@
             },
             "E:\\lab\\maquer\\Maquer.Domain.Catalog\\Maquer.Domain.Catalog.csproj": {
               "projectPath": "E:\\lab\\maquer\\Maquer.Domain.Catalog\\Maquer.Domain.Catalog.csproj"
+            },
+            "E:\\lab\\maquer\\Maquer.Repositories\\Maquer.Repositories.csproj": {
+              "projectPath": "E:\\lab\\maquer\\Maquer.Repositories\\Maquer.Repositories.csproj"
             }
           }
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Maquer.Common;
 using Maquer.Domain.Catalog.Entities;
-using Maquer.Domain.Catalog.Repositories;
+using Maquer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

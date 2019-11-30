@@ -103,3 +103,5 @@
 /Maquer.UserService.Dtos/bin
 /Maquer.UserService.Dtos/obj
 /Maquer.Domain.User
+/Maquer.Repositories/obj
+/Maquer.Repositories/bin

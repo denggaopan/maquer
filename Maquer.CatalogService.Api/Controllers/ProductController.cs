@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Maquer.CatalogService.Dtos;
 using Maquer.Common.Api;
 using Maquer.Domain.Catalog.Entities;
-using Maquer.Domain.Catalog.Repositories;
+using Maquer.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

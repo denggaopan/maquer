@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Maquer.Domain.User\Maquer.Domain.User.csproj" />
+    <ProjectReference Include="..\Maquer.Repositories\Maquer.Repositories.csproj" />
     <ProjectReference Include="..\Maquer.UserService.Dtos\Maquer.UserService.Dtos.csproj" />
   </ItemGroup>
 
