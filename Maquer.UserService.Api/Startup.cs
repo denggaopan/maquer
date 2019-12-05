@@ -15,6 +15,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Maquer.UserService.Api
 {
@@ -31,10 +33,7 @@ namespace Maquer.UserService.Api
         public void ConfigureServices(IServiceCollection services)
         {
             #region AutoMapper
-            Mapper.Initialize(config =>
-            {
-                config.CreateMap<User, UserDto>();
-            });
+            services.AddAutoMapper(typeof(AutoMapperConfig));
             #endregion
 
             services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Default")));
@@ -43,8 +42,8 @@ namespace Maquer.UserService.Api
 
             services.AddConsulConfig(Configuration);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(o=>o.SerializerSettings.DateFormatString="yyyy-MM-dd HH:mm:ss");
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(o => { o.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"; });
 
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
@@ -57,7 +56,7 @@ namespace Maquer.UserService.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env,ApplicationDbContext db)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,DbContext db)
         {
             if (db.Database.GetPendingMigrations().Any())
             {
@@ -70,8 +69,12 @@ namespace Maquer.UserService.Api
 
             app.UseConsul(Configuration);
 
-            app.UseAuthentication();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseAuthentication();//认证
+            app.UseAuthorization();//授权
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
         }
     }
 }

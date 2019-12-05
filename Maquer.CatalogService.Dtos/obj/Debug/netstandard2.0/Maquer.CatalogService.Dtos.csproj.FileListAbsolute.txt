@@ -1,7 +1,0 @@
-E:\lab\maquer\Maquer.CatalogService.Dtos\bin\Debug\netstandard2.0\Maquer.CatalogService.Dtos.deps.json
-E:\lab\maquer\Maquer.CatalogService.Dtos\bin\Debug\netstandard2.0\Maquer.CatalogService.Dtos.dll
-E:\lab\maquer\Maquer.CatalogService.Dtos\bin\Debug\netstandard2.0\Maquer.CatalogService.Dtos.pdb
-E:\lab\maquer\Maquer.CatalogService.Dtos\obj\Debug\netstandard2.0\Maquer.CatalogService.Dtos.AssemblyInfoInputs.cache
-E:\lab\maquer\Maquer.CatalogService.Dtos\obj\Debug\netstandard2.0\Maquer.CatalogService.Dtos.AssemblyInfo.cs
-E:\lab\maquer\Maquer.CatalogService.Dtos\obj\Debug\netstandard2.0\Maquer.CatalogService.Dtos.dll
-E:\lab\maquer\Maquer.CatalogService.Dtos\obj\Debug\netstandard2.0\Maquer.CatalogService.Dtos.pdb

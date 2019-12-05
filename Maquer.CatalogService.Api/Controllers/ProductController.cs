@@ -33,6 +33,19 @@ namespace Maquer.CatalogService.Api.Controllers
             return new ApiResult<IEnumerable<Product>> { Code = (int)ApiStatusCode.Success, Data = list };
         }
 
+        [HttpGet("list")]
+        public ApiResult<IEnumerable<Product>> GetList(int pageNumber = 1, int pageSize = 10)
+        {
+            var q = _productRepo.GetAll(a => !a.IsDeleted);
+            if (q == null || q.Count() == 0)
+            {
+                return new ApiResult<IEnumerable<Product>> { Code = (int)ApiStatusCode.Fail, Message = "无数据" };
+            }
+
+            var list = q.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            return new ApiResult<IEnumerable<Product>> { Code = (int)ApiStatusCode.Success, Data = list };
+        }
+
         [HttpGet("{id}")]
         public ApiResult<Product> Get(string id)
         {

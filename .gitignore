@@ -107,3 +107,9 @@
 /Maquer.Repositories/bin
 /Maquer.IdentityServer/obj
 /Maquer.IdentityServer/bin
+/Maquer.OrderService.Api/obj
+/Maquer.OrderService.Api/bin
+/Maquer.CatalogService.Dtos/bin
+/Maquer.CatalogService.Dtos/obj
+/Maquer.CatalogService.Api/obj
+/Maquer.CatalogService.Api/bin

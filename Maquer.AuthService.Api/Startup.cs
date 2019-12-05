@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 
 namespace Maquer.AuthService.Api
 {
@@ -27,7 +28,7 @@ namespace Maquer.AuthService.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddScoped<DbContext, ApplicationDbContext>();
@@ -35,22 +36,32 @@ namespace Maquer.AuthService.Api
 
             services.AddConsulConfig(Configuration);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(o => o.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss");
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(o => { o.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"; });
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,DbContext db)
         {
+            if (db.Database.GetPendingMigrations().Any())
+            {
+                db.Database.Migrate();
+            }
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseConsul(Configuration);
 
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

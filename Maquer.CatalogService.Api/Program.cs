@@ -19,7 +19,7 @@ namespace Maquer.CatalogService.Api
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseUrls("http://localhost:5002")
+                .UseUrls("http://localhost:5004")
                 .UseStartup<Startup>();
     }
 }

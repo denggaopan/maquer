@@ -12,10 +12,12 @@ namespace Maquer.Domain.Catalog.Entities
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Sku> Skus { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new SkuConfiguration());
         }
     }
 }

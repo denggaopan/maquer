@@ -18,9 +18,11 @@ namespace Maquer.UserService.Api.Controllers
     public class UserController : BaseController
     {
         private readonly IRepository<User> _userRepo;
-        public UserController(IUnitOfWork uow) : base(uow)
+        private readonly IMapper _mapper;
+        public UserController(IUnitOfWork uow,IMapper mapper) : base(uow)
         {
             _userRepo = _uow.Repository<User>();
+            _mapper = mapper;
         }
 
         [HttpGet("all")]
@@ -32,7 +34,7 @@ namespace Maquer.UserService.Api.Controllers
                 return new ApiResult<List<UserDto>> { Code = (int)ApiStatusCode.Fail, Message = "无数据" };
             }
 
-            var dto = Mapper.Map<List<UserDto>>(list);
+            var dto = _mapper.Map<List<UserDto>>(list);
             return new ApiResult<List<UserDto>> { Code = (int)ApiStatusCode.Success, Data = dto };
 
         }
@@ -46,7 +48,7 @@ namespace Maquer.UserService.Api.Controllers
                 return new ApiResult<UserDto> { Code = (int)ApiStatusCode.Fail, Message = "无数据" };
             }
 
-            var userDto = Mapper.Map<UserDto>(entity);
+            var userDto = _mapper.Map<UserDto>(entity);
             return new ApiResult<UserDto> { Code = (int)ApiStatusCode.Success, Data = userDto };
         }
 
@@ -75,7 +77,7 @@ namespace Maquer.UserService.Api.Controllers
                 return new ApiResult<UserDto> { Code = (int)ApiStatusCode.Error, Message = "新增失败" };
             }
 
-            var userDto = Mapper.Map<UserDto>(entity);
+            var userDto = _mapper.Map<UserDto>(entity);
             return new ApiResult<UserDto> { Code = (int)ApiStatusCode.Success, Data = userDto };
         }
 

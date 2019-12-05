@@ -41,7 +41,7 @@ namespace Maquer.AuthService.Api.Controllers
             }
 
             var client = new HttpClient();
-            DiscoveryResponse dr = await client.GetDiscoveryDocumentAsync(_configuration["IdentityServer:Url"]);
+            var dr = await client.GetDiscoveryDocumentAsync(_configuration["IdentityServer:Url"]);
             if (dr.IsError)
             {
                 return new ApiResult<string> { Code = (int)ApiStatusCode.Fail,Message= "认证服务器未启动" };

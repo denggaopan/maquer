@@ -13,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 namespace Maquer.CatalogService.Api
 {
@@ -35,8 +37,8 @@ namespace Maquer.CatalogService.Api
 
             services.AddConsulConfig(Configuration);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(o => o.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss");
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(options => { options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"; });
 
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
@@ -48,7 +50,7 @@ namespace Maquer.CatalogService.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext db)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DbContext db)
         {
             if (db.Database.GetPendingMigrations().Any())
             {
@@ -61,8 +63,15 @@ namespace Maquer.CatalogService.Api
 
             app.UseConsul(Configuration);
 
-            app.UseAuthentication();
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseAuthentication();//认证
+            app.UseAuthorization();//授权
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

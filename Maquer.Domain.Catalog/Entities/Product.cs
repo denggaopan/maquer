@@ -21,6 +21,8 @@ namespace Maquer.Domain.Catalog.Entities
         public bool IsTop { get; set; }
         public bool IsSald { get; set; }
 
+        public virtual ICollection<Sku> Skus { get; set; }
+
     }
 
     public class ProductConfiguration : IEntityTypeConfiguration<Product>
