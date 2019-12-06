@@ -61,12 +61,13 @@ namespace Maquer.CatalogService.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseConsul(Configuration);
+            //app.UseConsul(Configuration);
 
             app.UseRouting();
 
             app.UseAuthentication();//认证
             app.UseAuthorization();//授权
+            app.UseMiddleware<CustomAuthMiddleware>();//自定义授权
 
             app.UseEndpoints(endpoints =>
             {

@@ -93,6 +93,51 @@ namespace Maquer.AuthService.Api.Controllers
             return new ApiResult<bool> { Code = (int)ApiStatusCode.Success, Message = "SUCCESS", Data = true };
         }
 
+        [HttpPost("validapiurl")]
+        public ApiResult<bool> ValidApiUrl([FromBody] TokenValidPermissionDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return new ApiResult<bool> { Code = (int)ApiStatusCode.Error, Message = "数据校验不通过", Data = false };
+            }
+            var login = _uow.Repository<UserLogin>().Get(a => a.Token == dto.Token);
+            if (login == null)
+            {
+                return new ApiResult<bool> { Code = (int)ApiStatusCode.Fail, Message = "用户未曾登录", Data = false };
+            }
 
+            var success = login.CreatedTime.AddMinutes(login.Expires) >= DateTime.Now;
+            if (!success)
+            {
+                return new ApiResult<bool> { Code = (int)ApiStatusCode.Fail, Message = "登录已过期", Data = false };
+            }
+
+            /*permission valid*/
+            var apiUrl = _uow.Repository<ApiUrl>().Get(a=>a.Url == dto.ApiUrl && a.Method == dto.Method);
+            if(apiUrl == null)
+            {
+                return new ApiResult<bool> { Code = (int)ApiStatusCode.Fail, Message = "无权限", Data = false };
+            }
+
+            var ra = _uow.Repository<RoleApiUrl>().GetAll(a=>a.ApiUrlId == apiUrl.Id);
+            if(ra == null || ra.Count() == 0)
+            {
+                return new ApiResult<bool> { Code = (int)ApiStatusCode.Fail, Message = "无权限", Data = false };
+            }
+
+            var userRoles = _uow.Repository<UserRole>().GetAll(a => a.UserId == login.UserId);
+            if(userRoles == null || userRoles.Count() == 0)
+            {
+                return new ApiResult<bool> { Code = (int)ApiStatusCode.Fail, Message = "无权限", Data = false };
+            }
+            var roleIds = userRoles.Select(a => a.RoleId);
+            var isMap = ra.Any(a=> roleIds.Contains(a.RoleId));
+            if (!isMap)
+            {
+                return new ApiResult<bool> { Code = (int)ApiStatusCode.Fail, Message = "无权限", Data = false };
+            }
+
+            return new ApiResult<bool> { Code = (int)ApiStatusCode.Success, Message = "SUCCESS", Data = true };
+        }
     }
 }
