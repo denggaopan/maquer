@@ -6,7 +6,7 @@
       "DownstreamScheme": "http",
       "ServiceName": "AuthService",
       "LoadBalancerOptions": {
-        "Type": "LeastConnection"
+        "Type": "RoundRobin"
       },
       "UpstreamPathTemplate": "/auth/{url}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
@@ -49,12 +49,12 @@
       "ReRoutesCaseSensitive": false
     }
   ],
-    "GlobalConfiguration": { 
-      "ServiceDiscoveryProvider": {
-        "Host": "localhost",
-        "Port": 8500,
-        "Type":"PollConsul",
-        "PollingInterval": 5000
-      }
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "PollConsul",
+      "PollingInterval": 5000
     }
+  }
   }

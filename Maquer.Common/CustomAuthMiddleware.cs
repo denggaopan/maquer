@@ -29,7 +29,7 @@ namespace Maquer.Common
         {
             var isValid = true;
             var method = context.Request.Method;
-            var path = context.Request.Path.ToString();            
+            var path = context.Request.Path.ToString();
             StringValues auth;
             var res = context.Request.Headers.TryGetValue("Authorization",out auth);
             if (!res)
@@ -81,7 +81,8 @@ namespace Maquer.Common
                     #endregion
 
                     //2.接口访问权限
-                    var url = config["Gateway:Host"] + ServiceApiUrls.auth_token_validapiurl;
+                    //var url = config["Gateway:Host"] + ServiceApiUrls.auth_token_validapiurl;
+                    var url = "http://localhost:5002/api/token/validapiurl";
                     var apiUrl = path.Replace("api", config["Service:ShortName"].ToString().ToLower());
                     var data = new { token, apiUrl, method };
                     var r = await ServiceClient.PostAsync(url, data);

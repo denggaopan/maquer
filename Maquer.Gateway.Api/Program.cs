@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
+using Ocelot.Provider.Polly;
 
 
 namespace Maquer.Gateway.Api
@@ -34,7 +35,8 @@ namespace Maquer.Gateway.Api
             .ConfigureServices(services =>
             {
                 services.AddOcelot()
-                    .AddConsul();
+                    .AddConsul()
+                    .AddPolly();
             })
             .Configure(app =>
             {

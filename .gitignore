@@ -113,3 +113,5 @@
 /Maquer.CatalogService.Dtos/obj
 /Maquer.CatalogService.Api/obj
 /Maquer.CatalogService.Api/bin
+/Maquer.UserService.ApiClient/obj
+/Maquer.UserService.ApiClient/bin

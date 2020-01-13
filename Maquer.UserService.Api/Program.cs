@@ -19,7 +19,7 @@ namespace Maquer.UserService.Api
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseUrls("http://localhost:5003")
+                .UseUrls("http://192.168.10.50:5003")
                 .UseStartup<Startup>();
     }
 }

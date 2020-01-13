@@ -9,12 +9,14 @@ namespace Maquer.Domain.Catalog.Entities
 {
     public class Product : BaseEntity<string>
     {
+        public string CategoryId { get; set; }
         public string Name { get; set; }
         public string SubName { get; set; }
         public string Description { get; set; }
         public string Tags { get; set; }
         public string ImgUrl { get; set; }
         public decimal Price { get; set; }
+        public int Quantity { get; set; }
         public bool IsActive { get; set; }
         public bool IsRecommend { get; set; }
         public bool IsHot { get; set; }
@@ -22,6 +24,7 @@ namespace Maquer.Domain.Catalog.Entities
         public bool IsSald { get; set; }
 
         public virtual ICollection<Sku> Skus { get; set; }
+        public virtual ProductCategory ProductCategory { get; set; }
 
     }
 

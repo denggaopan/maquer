@@ -18,5 +18,33 @@ namespace Maquer.CatalogService.Api.Controllers
         }
 
 
+        protected string Authorization
+        {
+            get
+            {
+                try
+                {
+                    string authorization = Request.Headers["Authorization"];
+                    return authorization;
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        protected string BearerToken
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(Authorization) && Authorization.StartsWith("Bearer "))
+                {
+                    return Authorization.Substring(7);
+                }
+                return string.Empty;
+            }
+        }
+
     }
 }

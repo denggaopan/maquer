@@ -6,8 +6,12 @@ using Maquer.CatalogService.Dtos;
 using Maquer.Common.Api;
 using Maquer.Domain.Catalog.Entities;
 using Maquer.Repositories;
+using Maquer.UserService.ApiClient;
+using Maquer.UserService.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using WebApiClient;
 
 namespace Maquer.CatalogService.Api.Controllers
 {
@@ -55,6 +59,18 @@ namespace Maquer.CatalogService.Api.Controllers
                 return new ApiResult<Product> { Code = (int)ApiStatusCode.Fail, Message = "无数据" };
             }
             return new ApiResult<Product> { Code = (int)ApiStatusCode.Success, Data = entity };
+        }
+
+        /// <summary>
+        /// 测试微服务之间的调用
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpGet("user")]
+        public async Task<ApiResult<UserDto>> GetUserAsync([FromServices]IUserServiceApi userApi,string userId)
+        {
+            var ar =await userApi.GetAsync(userId);
+            return ar;
         }
 
         // POST api/values
