@@ -67,10 +67,14 @@ namespace Maquer.CatalogService.Api.Controllers
         /// <param name="userId"></param>
         /// <returns></returns>
         [HttpGet("user")]
-        public async Task<ApiResult<UserDto>> GetUserAsync([FromServices]IUserServiceApi userApi,string userId)
+        public async Task<ApiResult<object>> GetUserAsync([FromServices]IUserServiceApi userApi,string userId)
         {
-            var ar =await userApi.GetAsync(userId);
-            return ar;
+            var ar =await userApi.GetAsync(userId).Retry(3);
+            if(ar.Code == (int)ApiStatusCode.Success)
+            {
+                return new ApiResult<object> { Code = (int)ApiStatusCode.Success, Data = new { userId, data = ar.Data } };
+            }
+            return new ApiResult<object> { Code = ar.Code, Message=ar.Message, Data = new { userId, data = new object() } }; 
         }
 
         // POST api/values

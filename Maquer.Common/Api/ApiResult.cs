@@ -5,10 +5,14 @@ using System.Text;
 
 namespace Maquer.Common.Api
 {
-    public class ApiResult<T>
+    public class ApiResult<T> : ApiResult
     {
-        public int Code { get; set; }
-        public string Message { get; set; }
         public T Data { get; set; }
+    }
+
+    public class ApiResult
+    {
+        public int Code { get; set; } = 0;
+        public string Message { get; set; }
     }
 }

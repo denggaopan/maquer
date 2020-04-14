@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using WebApiClient;
 using Maquer.UserService.ApiClient;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Maquer.CatalogService.Api
 {
@@ -33,6 +34,7 @@ namespace Maquer.CatalogService.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddScoped<DbContext, ApplicationDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -45,20 +47,29 @@ namespace Maquer.CatalogService.Api
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "http://localhost:5001";
+                    options.Authority = Configuration["Identity:Host"];
                     options.RequireHttpsMetadata = false;
                     options.Audience = "CatalogService";
                 });
 
             services.AddSingleton<IHttpApiFactory<IUserServiceApi>, HttpApiFactory<IUserServiceApi>>(p =>
             {
-                object factory = p.GetService(typeof(IHttpContextAccessor));
-                var context = ((IHttpContextAccessor)factory).HttpContext;
-                var auth = context.Request.Headers["Authorization"].ToString();
-                var token = !string.IsNullOrEmpty(auth) && auth.StartsWith("Bearer") ? auth.Substring(7) : "";
+                var token = string.Empty;
+                try
+                {
+                    object factory = p.GetService(typeof(IHttpContextAccessor));
+                    var context = ((IHttpContextAccessor)factory).HttpContext;
+                    var auth = (string)context.Request.Headers["Authorization"];
+                    token = (!string.IsNullOrEmpty(auth) && auth.StartsWith("Bearer")) ? auth.Substring(7) : "";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"==>token ex:{ex.ToString()}");
+                }
+
                 return new HttpApiFactory<IUserServiceApi>().ConfigureHttpApiConfig(c =>
                 {
-                    c.HttpHost = new Uri("http://192.168.10.50:5000/user/");
+                    c.HttpHost = new Uri($"{Configuration["Gateway:Host"]}/{Configuration["Services:User:ShortName"]}/");
                     c.LoggerFactory = p.GetRequiredService<ILoggerFactory>();
                     c.GlobalFilters.Add(new ApiTokenFilter(token));
                 });
