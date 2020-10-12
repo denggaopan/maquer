@@ -14,6 +14,7 @@ namespace Maquer.Domain.Catalog.Entities
         public int Quantity { get; set; }
 
         public virtual Product Product {get;set;}
+        public virtual ICollection<SkuItem> SkuItems { get; set; }
     }
 
     public class SkuConfiguration : IEntityTypeConfiguration<Sku>

@@ -1,16 +1,37 @@
 {
-  "ReRoutes": [
+  "Routes": [
     {
-      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/auth/{url}",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "RouteIsCaseSensitive": false,
       "DownstreamPathTemplate": "/api/{url}",
       "DownstreamScheme": "http",
       "ServiceName": "AuthService",
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       },
-      "UpstreamPathTemplate": "/auth/{url}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "ReRoutesCaseSensitive": false
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/auth/token",
+      "UpstreamHttpMethod": [ "Post" ],
+      "ReRoutesCaseSensitive": false,
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/token",
+      "DownstreamScheme": "http",
+      "ServiceName": "AuthService",
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "Priority": 2,
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 3000,
+        "TimeoutValue": 5000
+      }
     },
     {
       "UseServiceDiscovery": true,
@@ -21,8 +42,8 @@
         "Type": "RoundRobin"
       },
       "UpstreamPathTemplate": "/user/{url}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "ReRoutesCaseSensitive": false
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "RouteIsCaseSensitive": false
     },
     {
       "UseServiceDiscovery": true,
@@ -34,7 +55,7 @@
       },
       "UpstreamPathTemplate": "/order/{url}",
       "UpstreamHttpMethod": [ "Get" ],
-      "ReRoutesCaseSensitive": false
+      "RouteIsCaseSensitive": false
     },
     {
       "UseServiceDiscovery": true,
@@ -45,8 +66,8 @@
         "Type": "LeastConnection"
       },
       "UpstreamPathTemplate": "/catalog/{url}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "ReRoutesCaseSensitive": false
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "RouteIsCaseSensitive": false
     }
   ],
   "GlobalConfiguration": {
@@ -57,4 +78,4 @@
       "PollingInterval": 5000
     }
   }
-  }
+}

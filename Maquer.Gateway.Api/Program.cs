@@ -25,22 +25,33 @@ namespace Maquer.Gateway.Api
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseUrls("http://*:5000")
+                 .UseStartup<Startup>()
              .ConfigureAppConfiguration((hostingContext, config) =>
              {
-                 config
-                     .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
-                     .AddJsonFile("ocelot.json")
-                     .AddEnvironmentVariables();
-             })
-            .ConfigureServices(services =>
-            {
-                services.AddOcelot()
-                    .AddConsul()
-                    .AddPolly();
-            })
-            .Configure(app =>
-            {
-                app.UseOcelot().Wait();
-            });
+                 config.AddJsonFile("ocelot.json", false, true);
+             });
+            //.ConfigureServices(services =>
+            //{
+            //    var authenticationProviderKey = "OcelotKeykkkkkkkkkk";
+            //    var identityServerOptions = new IdentityServerOptions();
+            //    Configuration.Bind("IdentityServerOptions", identityServerOptions);
+            //    services.AddAuthentication(identityServerOptions.IdentityScheme)
+            //        .AddIdentityServerAuthentication(authenticationProviderKey, options =>
+            //        {
+            //            options.RequireHttpsMetadata = false; //是否启用https
+            //        options.Authority = $"http://{identityServerOptions.ServerIP}:{identityServerOptions.ServerPort}";//配置授权认证的地址
+            //        options.ApiName = identityServerOptions.ResourceName; //资源名称，跟认证服务中注册的资源列表名称中的apiResource一致
+            //        options.SupportedTokens = SupportedTokens.Both;
+            //        }
+            //        );
+
+        //    services.AddOcelot()
+        //        .AddConsul()
+        //        .AddPolly();
+        //})
+        //.Configure(app =>
+        //{
+        //    app.UseOcelot().Wait();
+        //});
     }
 }

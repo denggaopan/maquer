@@ -62,6 +62,13 @@ namespace Maquer.Repositories
         void Update(T entity);
 
         /// <summary>
+        /// 更新 (用于实体没有状态追踪，仅更新指定属性)
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="properties"></param>
+        void Update(T entity, params Expression<Func<T, object>>[] properties);
+
+        /// <summary>
         /// 更新
         /// </summary>
         /// <param name="entities"></param>

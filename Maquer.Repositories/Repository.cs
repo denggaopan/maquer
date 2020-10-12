@@ -64,6 +64,20 @@ namespace Maquer.Repositories
             _objectSet.Attach(entity);
         }
 
+        public void Update(T entity, params Expression<Func<T, object>>[] properties)
+        {
+            foreach (var property in properties)
+            {
+                var propertyName = property.Name;
+                if (string.IsNullOrEmpty(propertyName))
+                {
+                    propertyName = property.Body.ToString().Split(',')[0].Split('.')[1];
+                }
+                _db.Entry(entity).Property(propertyName).IsModified = true;
+
+            }
+        }
+
         public void Update(T[] entities)
         {
             foreach (var entity in entities)

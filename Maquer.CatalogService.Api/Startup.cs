@@ -57,7 +57,7 @@ namespace Maquer.CatalogService.Api
                 var token = string.Empty;
                 try
                 {
-                    object factory = p.GetService(typeof(IHttpContextAccessor));
+                    var factory = p.GetService(typeof(IHttpContextAccessor));
                     var context = ((IHttpContextAccessor)factory).HttpContext;
                     var auth = (string)context.Request.Headers["Authorization"];
                     token = (!string.IsNullOrEmpty(auth) && auth.StartsWith("Bearer")) ? auth.Substring(7) : "";

@@ -21,9 +21,11 @@ namespace Maquer.CatalogService.Api.Controllers
     public class ProductController : BaseController
     {
         private readonly IRepository<Product> _productRepo;
-        public ProductController(IUnitOfWork uow) : base(uow)
+        private readonly IUserServiceApi _userApi;
+        public ProductController(IUnitOfWork uow, IUserServiceApi userapi) : base(uow)
         {
             _productRepo = _uow.Repository<Product>();
+            _userApi = userapi;
         }
 
         [HttpGet("all")]
@@ -38,7 +40,7 @@ namespace Maquer.CatalogService.Api.Controllers
         }
 
         [HttpGet("list")]
-        public ApiResult<IEnumerable<Product>> GetList(int pageNumber = 1, int pageSize = 10)
+        public ApiResult<IEnumerable<Product>> GetList(int page = 1, int limit = 10)
         {
             var q = _productRepo.GetAll(a => !a.IsDeleted);
             if (q == null || q.Count() == 0)
@@ -46,7 +48,7 @@ namespace Maquer.CatalogService.Api.Controllers
                 return new ApiResult<IEnumerable<Product>> { Code = (int)ApiStatusCode.Fail, Message = "无数据" };
             }
 
-            var list = q.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            var list = q.Skip((page - 1) * limit).Take(limit);
             return new ApiResult<IEnumerable<Product>> { Code = (int)ApiStatusCode.Success, Data = list };
         }
 
@@ -67,9 +69,9 @@ namespace Maquer.CatalogService.Api.Controllers
         /// <param name="userId"></param>
         /// <returns></returns>
         [HttpGet("user")]
-        public async Task<ApiResult<object>> GetUserAsync([FromServices]IUserServiceApi userApi,string userId)
+        public async Task<ApiResult<object>> GetUserAsync(string userId)
         {
-            var ar =await userApi.GetAsync(userId).Retry(3);
+            var ar =await _userApi.GetAsync(userId).Retry(3);
             if(ar.Code == (int)ApiStatusCode.Success)
             {
                 return new ApiResult<object> { Code = (int)ApiStatusCode.Success, Data = new { userId, data = ar.Data } };

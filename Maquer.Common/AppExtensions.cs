@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Http;
 using Consul;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,7 @@ namespace Maquer.Common
 {
     public static class AppExtensions
     {
+
         public static IServiceCollection AddConsulConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
@@ -34,13 +37,14 @@ namespace Maquer.Common
             var addresses = features.Get<IServerAddressesFeature>();
             var address = addresses.Addresses.First();
 
+            //var address = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>().HttpContext.Request.Host.ToString();
             Console.WriteLine($"address={address}");
 
             var serviceName = configuration.GetValue<string>("Service:Name");
             var uri = new Uri(address);
             var registration = new AgentServiceRegistration()
             {
-                ID = $"{serviceName}-{uri.Port}",
+                ID = $"{serviceName}-{Guid.NewGuid()}", //ID = $"{serviceName}-{uri.Port}",
                 Name = serviceName,
                 Address = $"{uri.Host}",
                 Port = uri.Port,

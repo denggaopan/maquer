@@ -2,7 +2,6 @@ E:\lab\maquer\Maquer.PaymentServive.Api\bin\Debug\netcoreapp3.1\appsettings.Deve
 E:\lab\maquer\Maquer.PaymentServive.Api\bin\Debug\netcoreapp3.1\appsettings.json
 E:\lab\maquer\Maquer.PaymentServive.Api\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 E:\lab\maquer\Maquer.PaymentServive.Api\bin\Debug\netcoreapp3.1\Maquer.PaymentServive.Api.exe
-E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\Maquer.PaymentServive.Api.csprojAssemblyReference.cache
 E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\staticwebassets\Maquer.PaymentServive.Api.StaticWebAssets.Manifest.cache
 E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\staticwebassets\Maquer.PaymentServive.Api.StaticWebAssets.xml
 E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\Maquer.PaymentServive.Api.AssemblyInfoInputs.cache
@@ -90,3 +89,5 @@ E:\lab\maquer\Maquer.PaymentServive.Api\bin\Debug\netcoreapp3.1\Maquer.PaymentSe
 E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\Maquer.PaymentServive.Api.MvcApplicationPartsAssemblyInfo.cache
 E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\Maquer.PaymentServive.Api.dll
 E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\Maquer.PaymentServive.Api.pdb
+E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\Maquer.PaymentServive.Api.csproj.CoreCompileInputs.cache
+E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\Maquer.PaymentServive.Api.genruntimeconfig.cache

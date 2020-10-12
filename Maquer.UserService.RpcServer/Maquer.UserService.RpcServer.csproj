@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>dotnet-Maquer.UserService.RpcServer-ED54A529-856F-44A5-B037-405B47611982</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="thrift\gen-csharp\**" />
+    <Content Remove="thrift\gen-csharp\**" />
+    <EmbeddedResource Remove="thrift\gen-csharp\**" />
+    <None Remove="thrift\gen-csharp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="apache-thrift-netcore" Version="0.9.3.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+</Project>

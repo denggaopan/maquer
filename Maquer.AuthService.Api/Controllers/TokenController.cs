@@ -29,6 +29,11 @@ namespace Maquer.AuthService.Api.Controllers
         [HttpPost]
         public async Task<ApiResult<string>> Post([FromBody] TokenQueryDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return new ApiResult<string> { Code = (int)ApiStatusCode.Fail, Message = "参数错误" };
+            }
+
             var entity = _userRepo.Get(a => a.UserName == dto.UserName);
             if(entity == null)
             {

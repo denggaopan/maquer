@@ -88,6 +88,79 @@ namespace Maquer.Domain.Catalog.Migrations
                     b.ToTable("Product");
                 });
 
+            modelBuilder.Entity("Maquer.Domain.Catalog.Entities.ProductAttribute", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("ShowType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sort")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductAttribute");
+                });
+
+            modelBuilder.Entity("Maquer.Domain.Catalog.Entities.ProductAttributeItem", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("ProductAttributeId")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("Sort")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductAttributeId");
+
+                    b.ToTable("ProductAttributeItem");
+                });
+
             modelBuilder.Entity("Maquer.Domain.Catalog.Entities.ProductCategory", b =>
                 {
                     b.Property<string>("Id")
@@ -130,6 +203,33 @@ namespace Maquer.Domain.Catalog.Migrations
                     b.ToTable("ProductCategory");
                 });
 
+            modelBuilder.Entity("Maquer.Domain.Catalog.Entities.ProductTag", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("Sort")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductTag");
+                });
+
             modelBuilder.Entity("Maquer.Domain.Catalog.Entities.Sku", b =>
                 {
                     b.Property<string>("Id")
@@ -165,6 +265,41 @@ namespace Maquer.Domain.Catalog.Migrations
                     b.ToTable("Sku");
                 });
 
+            modelBuilder.Entity("Maquer.Domain.Catalog.Entities.SkuItem", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ProductAttributeId")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProductAttributeItemId")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("SkuId")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<DateTime?>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductAttributeId");
+
+                    b.HasIndex("ProductAttributeItemId");
+
+                    b.HasIndex("SkuId");
+
+                    b.ToTable("SkuItem");
+                });
+
             modelBuilder.Entity("Maquer.Domain.Catalog.Entities.Product", b =>
                 {
                     b.HasOne("Maquer.Domain.Catalog.Entities.ProductCategory", "ProductCategory")
@@ -172,11 +307,40 @@ namespace Maquer.Domain.Catalog.Migrations
                         .HasForeignKey("ProductCategoryId");
                 });
 
+            modelBuilder.Entity("Maquer.Domain.Catalog.Entities.ProductAttribute", b =>
+                {
+                    b.HasOne("Maquer.Domain.Catalog.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("Maquer.Domain.Catalog.Entities.ProductAttributeItem", b =>
+                {
+                    b.HasOne("Maquer.Domain.Catalog.Entities.ProductAttribute", "ProductAttribute")
+                        .WithMany("ProductAttributeItems")
+                        .HasForeignKey("ProductAttributeId");
+                });
+
             modelBuilder.Entity("Maquer.Domain.Catalog.Entities.Sku", b =>
                 {
                     b.HasOne("Maquer.Domain.Catalog.Entities.Product", "Product")
                         .WithMany("Skus")
                         .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("Maquer.Domain.Catalog.Entities.SkuItem", b =>
+                {
+                    b.HasOne("Maquer.Domain.Catalog.Entities.ProductAttribute", "ProductAttribute")
+                        .WithMany()
+                        .HasForeignKey("ProductAttributeId");
+
+                    b.HasOne("Maquer.Domain.Catalog.Entities.ProductAttributeItem", "ProductAttributeItem")
+                        .WithMany()
+                        .HasForeignKey("ProductAttributeItemId");
+
+                    b.HasOne("Maquer.Domain.Catalog.Entities.Sku", "Sku")
+                        .WithMany("SkuItems")
+                        .HasForeignKey("SkuId");
                 });
 #pragma warning restore 612, 618
         }

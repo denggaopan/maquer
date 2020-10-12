@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "Maquer.UserService.RpcServer": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
