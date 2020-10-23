@@ -34,20 +34,22 @@ namespace Maquer.Common
 
             if (!(app.Properties["server.Features"] is FeatureCollection features)) return app;
 
-            var addresses = features.Get<IServerAddressesFeature>();
-            var address = addresses.Addresses.First();
+            //var addresses = features.Get<IServerAddressesFeature>();
+            //var address = addresses.Addresses.First();
+            var address = configuration["Service:Url"];
 
             //var address = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>().HttpContext.Request.Host.ToString();
             Console.WriteLine($"address={address}");
 
-            var serviceName = configuration.GetValue<string>("Service:Name");
+            var serviceName = configuration["Service:Name"];
             var uri = new Uri(address);
             var registration = new AgentServiceRegistration()
             {
-                ID = $"{serviceName}-{Guid.NewGuid()}", //ID = $"{serviceName}-{uri.Port}",
+                ID = $"{serviceName}-{Guid.NewGuid().ToString("N")}", //ID = $"{serviceName}-{uri.Port}",
                 Name = serviceName,
-                Address = $"{uri.Host}",
+                Address = uri.Host,
                 Port = uri.Port,
+                Tags = new[] { $"urlprefix-/{serviceName}" },//添加 urlprefix-/servicename 格式的 tag 标签，以便 Fabio 识别
                 Check = new AgentServiceCheck()
                 {
                     DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5),//服务启动多久后注册
@@ -56,6 +58,7 @@ namespace Maquer.Common
                     Timeout = TimeSpan.FromSeconds(5),
                     //TLSSkipVerify = false,
                 }
+
             };
 
             logger.LogInformation("Registering with Consul");

@@ -93,9 +93,10 @@ namespace Maquer.CatalogService.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseConsul(Configuration);
 
             app.UseRouting();
+
+            app.UseConsul(Configuration);
 
             app.UseAuthentication();//认证
             app.UseAuthorization();//授权

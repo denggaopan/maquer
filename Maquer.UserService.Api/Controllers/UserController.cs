@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Maquer.UserService.Api.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : BaseController
@@ -63,6 +62,7 @@ namespace Maquer.UserService.Api.Controllers
             }
 
             var entity = new User();
+            entity.Id = Guid.NewGuid().ToString();
             entity.NickName = dto.NickName;
             entity.UserName = dto.UserName;
             entity.PasswordSalt = Guid.NewGuid().ToString("N");

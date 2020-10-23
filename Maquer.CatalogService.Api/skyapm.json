@@ -1,6 +1,6 @@
 {
   "SkyWalking": {
-    "ServiceName": "CatalogService",
+    "ServiceName": "maquer-catalog-service",
     "Namespace": "",
     "HeaderVersions": [
       "sw6"

@@ -91,3 +91,4 @@ E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\Maquer.PaymentSe
 E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\Maquer.PaymentServive.Api.pdb
 E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\Maquer.PaymentServive.Api.csproj.CoreCompileInputs.cache
 E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\Maquer.PaymentServive.Api.genruntimeconfig.cache
+E:\lab\maquer\Maquer.PaymentServive.Api\obj\Debug\netcoreapp3.1\Maquer.PaymentServive.Api.csprojAssemblyReference.cache

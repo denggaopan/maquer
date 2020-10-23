@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Consul;
 using Maquer.CatalogService.Dtos;
 using Maquer.Common.Api;
 using Maquer.Domain.Catalog.Entities;
@@ -10,20 +12,22 @@ using Maquer.UserService.ApiClient;
 using Maquer.UserService.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using WebApiClient;
 
 namespace Maquer.CatalogService.Api.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : BaseController
     {
+        private readonly IConfiguration _config;
         private readonly IRepository<Product> _productRepo;
         private readonly IUserServiceApi _userApi;
-        public ProductController(IUnitOfWork uow, IUserServiceApi userapi) : base(uow)
+        public ProductController(IConfiguration config, IUnitOfWork uow, IUserServiceApi userapi) : base(uow)
         {
+            _config = config;
             _productRepo = _uow.Repository<Product>();
             _userApi = userapi;
         }
@@ -77,6 +81,31 @@ namespace Maquer.CatalogService.Api.Controllers
                 return new ApiResult<object> { Code = (int)ApiStatusCode.Success, Data = new { userId, data = ar.Data } };
             }
             return new ApiResult<object> { Code = ar.Code, Message=ar.Message, Data = new { userId, data = new object() } }; 
+        }
+
+        [HttpGet("user-list")]
+        public async Task<ApiResult<object>> GetUserList()
+        {
+            
+            using (var consulClient = new ConsulClient(a => a.Address = new Uri(_config["Consul:Host"])))
+            {
+                var services = consulClient.Catalog.Service("UserService").Result.Response;
+                
+                if (services != null && services.Any())
+                {
+                    Random r = new Random();
+                    int index = r.Next(services.Count());
+                    var service = services.ElementAt(index);
+
+                    using (HttpClient client = new HttpClient())
+                    {
+                        var response = await client.GetAsync($"http://{service.ServiceAddress}:{service.ServicePort}/api/user/all");
+                        var result = await response.Content.ReadAsStringAsync();
+                        return new ApiResult<object>() { Code = 0, Data = result };
+                    }
+                }
+            }
+            return new ApiResult<object>() { Code = 1, Message="Error"};
         }
 
         // POST api/values

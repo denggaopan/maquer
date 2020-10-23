@@ -13,7 +13,7 @@ namespace Maquer.UserService.Api.Controllers
     {
         public IActionResult Get()
         {
-            return Ok(DateTime.Now);
+            return Ok("ok");
         }
     }
 }

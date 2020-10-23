@@ -72,7 +72,7 @@
   ],
   "GlobalConfiguration": {
     "ServiceDiscoveryProvider": {
-      "Host": "localhost",
+      "Host": "192.168.10.50",
       "Port": 8500,
       "Type": "PollConsul",
       "PollingInterval": 5000
